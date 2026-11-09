@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Begins Again! - Pax Machina</title>
+    <style>
+        :root {
+            /* Light theme (Default, matched to screenshot beige) */
+            --bg-color: #f6f5f0; 
+            --text-color: #111111;
+            --text-light: #444444;
+            --line-color: #d1d1cd;
+            --circle-outline: #111111;
+            --circle-solid: #111111;
+            
+            --serif-font: "Georgia", "Times New Roman", serif;
+            --sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Base font size - adjusted to 18px */
+        html {
+            font-size: 18px; 
+        }
+
+        body.dark-mode {
+            /* Dark theme */
+            --bg-color: #1a1a1a;
+            --text-color: #eeeeee;
+            --text-light: #aaaaaa;
+            --line-color: #444444;
+            --circle-outline: #eeeeee;
+            --circle-solid: #eeeeee;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--serif-font);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Minimalist Header / Icons */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2rem 2.5rem;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+
+        .theme-toggle {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .circle-outline {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border: 1.5px solid var(--circle-outline);
+            border-radius: 50%;
+            transition: border-color 0.3s ease;
+        }
+
+        .circle-solid {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background-color: var(--circle-solid);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 720px; 
+            margin: 8rem auto 6rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Title Block (Centered) */
+        .title-block {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .kicker {
+            font-family: var(--sans-font);
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin: 0 0 2rem 0;
+            color: var(--text-color);
+        }
+
+        /* Properly formatted standard headings, now un-bolded to match h1 */
+        h2 {
+            font-size: 1.7rem;
+            font-style: normal;
+            font-weight: 400; /* Removed bolding */
+            text-align: left;
+            margin: 3.5rem 0 1.5rem 0;
+            color: var(--text-color);
+        }
+
+        .author {
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+        }
+
+        .deck {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0 auto 1.5rem auto;
+            max-width: 620px; 
+            text-align: center;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+
+        /* Separators */
+        hr {
+            border: none;
+            border-top: 1px solid var(--line-color);
+            width: 100%;
+            margin: 3.5rem 0;
+            transition: border-color 0.3s ease;
+        }
+
+        hr.short {
+            width: 80px;
+            margin: 3.5rem auto;
+        }
+
+        /* Body Content */
+        .body-content {
+            text-align: left;
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .body-content p {
+            margin-top: 0;
+            margin-bottom: 1.8rem;
+        }
+
+        /* Drop Cap & Small Caps */
+        .drop-cap {
+            float: left;
+            font-size: 3.6rem;
+            line-height: 0.85;
+            padding-top: 0.08em;
+            padding-right: 0.1em;
+            color: var(--text-color);
+        }
+
+        .small-caps {
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.05em;
+        }
+
+        sup {
+            font-size: 0.65em;
+            vertical-align: super;
+            line-height: 0;
+            margin-left: 1px;
+            color: var(--text-color);
+        }
+
+        /* Footnotes */
+        .footnotes {
+            margin-top: 4rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .footnotes p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            html { font-size: 15px; } 
+            h1 { font-size: 2.2rem; }
+            main { margin-top: 5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Minimalist Navigation (Right Side Only) -->
+    <header>
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <div class="circle-outline"></div>
+            <div class="circle-solid"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Title Block -->
+        <div class="title-block">
+            <div class="kicker">
+                PAX MACHINA<br>
+                ESSAY
+            </div>
+            
+            <h1>History Begins Again!</h1>
+            
+            <div class="author">by Max Ramsahoye</div>
+            
+            <div class="deck">
+                Since Fukuyama's declaration of "the end of history," it has been assumed that a civilisation coordinated by markets and parliaments was the last word in political economy. As AI begins to replace the humans who operate both — and the classes who preside over them — that assumption is about to be tested, and it's not clear those classes will let it be. The time is now to start building new systems outside of legacy powers.
+            </div>
+            
+            <div class="meta">
+                2026 &middot; 10 minute read
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Main Body Text -->
+        <div class="body-content">
+            <p>
+                <span class="drop-cap">I</span><span class="small-caps">n the summer of 1989, a</span> mid-level State Department official published an essay arguing that the fall of Soviet communism was not merely the end of the Cold War, but the terminus of humanity's ideological development.<sup>1</sup> Francis Fukuyama's "end of history" thesis held that liberal democracy and market capitalism, having outlasted monarchy, fascism, and communism, would not be superseded by some later, better system. They were not simply winning. They were what winning looked like, permanently. Thirty-two years later, a British prime minister could still stand up and reaffirm, almost as received wisdom, that free markets and liberal democracy remained the best available model for human progress.<sup>2</sup>
+            </p>
+
+            <p>
+                Fukuyama's thesis has been attacked for as long as it has existed, usually on the grounds that some rival ideology — political Islam, Chinese state capitalism, a resurgent authoritarian nationalism — would eventually reopen the contest of systems. But those critiques mostly conceded the deeper premise: that the ideological menu was fixed, and the argument was over which item on it would be chosen. Fredric Jameson's much-repeated remark that it is now easier to imagine the end of the world than the end of capitalism captured this mood exactly.<sup>3</sup> Even capitalism's harshest critics had come to treat it as a fact of nature rather than a historical artifact.
+            </p>
+
+            <p>
+                This essay makes a narrower and stranger claim than either the thesis or its usual critics. Market capitalism and parliamentary democracy are not being challenged by a rival ideology. They are being challenged by the disappearance of the thing they were built to coordinate: human beings, doing the deciding and the producing. As artificial intelligence decouples both functions from human labour and human judgement, the two institutions that Fukuyama took to be permanent will turn out to have been contingent on a set of technological conditions that advanced AI is now dismantling. Not the end of the world, and not obviously the end of capitalism either — but the end of the assumption that we already know what comes next. History, in the sense of live institutional contest, is starting again.
+            </p>
+
+            <h2>Not medieval institutions — industrial ones</h2>
+
+            <p>
+                A line from the biologist E.O. Wilson is often invoked in discussions of civilisational risk: that humanity is saddled with Paleolithic emotions, medieval institutions, and godlike technology.<sup>4</sup> The first and third parts of that diagnosis hold up well. We do carry evolutionary machinery tuned to small hunter-gatherer bands, and our technology genuinely has become close to godlike, from gene editing to instant global communication to machines that can hold a conversation. But "medieval institutions" is a poetic flourish more than an accurate description. Parliamentary democracy and market capitalism are not survivals from the age of cathedrals and guilds. They are Enlightenment inventions, refined and industrialised over the following two centuries: the joint-stock company, the factory system, universal suffrage, the regulatory state, mass schooling. Adam Smith and Karl Marx were not describing a medieval world; they were the first theorists of a new one, watching an older agrarian order give way to industrial capitalism in real time.
+            </p>
+
+            <p>
+                That matters for how we think about the present moment. Our governing institutions are not ancient and slow to change because they are old in the way a cathedral is old. They are the settled product of the last major technological transition, and they are as contingent on its assumptions as feudal land tenure was contingent on the assumptions of agrarian society. The Westphalian state and the laissez-faire market emerged in a world of, as it's sometimes put, guns, germs, and steel. We have since gained the power to edit the genome, split the atom, communicate instantly across the planet, and — very recently — build systems that can reason, plan, and act with a competence that in many domains now exceeds our own. It would be strange if the institutional settlement of the early nineteenth century turned out to be the last one humanity would ever need.
+            </p>
+
+            <h2>Why market capitalism breaks</h2>
+
+            <p>
+                Smith's own illustration of the market is worth taking literally: the butcher, the baker, the candlestick maker, each producing something through their own labour, exchanging it for something another has produced through theirs. The market as Smith described it is a coordination mechanism built for a specific and, until recently, universal condition — production is human, property is the claim a person has on what they made or justly acquired, and trade is the negotiated transfer of that claim between two humans who each want what the other has. Every subsequent refinement of market theory, from price theory to property law to contract enforcement, is an elaboration on that same triangle of human production, human property, and human-to-human trade. What AI displaces is not any one leg of the triangle but its foundational premise: that the thing being produced, owned, and traded is the output of human hands or human minds in the first place. An economy where production is substantially non-human isn't a stranger version of Smith's market — it's a different kind of system being asked to run on infrastructure designed for his.
+            </p>
+
+            <p>
+                Three pressures follow from that displacement. The first is on labour. The market economy depends on a loop in which people supply labour and receive income, and that income is what lets them buy back a share of what the economy produces. As AI systems match or exceed human performance across a widening range of cognitive and physical tasks, human labour loses its comparative advantage in more and more domains — not because people become less capable, but because the alternative becomes cheaper and better. What gets called "gradual disempowerment" or "the intelligence curse" in recent AI-governance writing, and what an older tradition would have recognised as the classic Marxist prediction of automation outrunning wage labour, is the same mechanism: the engine that produces goods decouples from the engine that distributes purchasing power to buy them.<sup>5</sup>
+            </p>
+
+            <p>
+                The second pressure is on scarcity itself. Prices exist to ration goods that cannot be produced in unlimited quantity, and to direct resources toward whoever values them most in monetary terms. An AI-operated economy approaching zero marginal cost of production and distribution — one additional unit of a good or service costing essentially nothing to produce — removes the condition of scarcity that makes price signals meaningful in the first place. This is one of the "five economic transitions" Peter Joseph identifies in his work on post-market systems: a shift from an economy organised around ownership, which exists to protect scarce property, toward one organised around access.<sup>6</sup>
+            </p>
+
+            <p>
+                The third pressure is on the market's role as an information processor. Friedrich Hayek's classical defence of markets was epistemic, not moral: no central planner could gather and act on the dispersed, localised knowledge that millions of independent price-setting actors hold collectively.<sup>7</sup> A sufficiently capable AI system, modelling supply, demand, and preference at a civilisational scale with something closer to complete information, would not need the market's decentralised discovery process to solve the same allocation problem — potentially more efficiently. Whether or not that capability exists yet, it is no longer a science-fiction premise. It's a live design question.
+            </p>
+
+            <p>
+                The market's core function was rationing scarcity through price and allocating production through property claims on human-made goods. Once production is substantially non-human and approaches zero marginal cost, that function has nothing left to do — there is no scarcity left to ration and no human production left to stake a property claim on. Universal basic services, delivered directly by AI-operated production systems, is not a welfare layer added on top of the market to catch what it misses. It is what allocation looks like once the market's reason for existing has been removed: provision without a price mechanism, because the condition price mechanisms exist to solve no longer holds. The market isn't outcompeted here — it's a solution to a problem that has stopped occurring, kept alive by habit and incumbency rather than function.
+            </p>
+
+            <h2>Why parliamentary democracy breaks</h2>
+
+            <p>
+                Representative democracy was never democracy at full resolution — it was a workaround. Direct deliberation, the town hall, works only up to the scale of a group that can actually talk to itself: something in the range of Dunbar's number, the few hundred relationships human cognition can meaningfully track at once. Beyond that scale, there was no technology capable of aggregating the preferences of a nation of millions into a single collective judgment except by radically compressing them — first into a vote, then into a representative sent to deliberate on your behalf in a room small enough to still function as a town hall. Parliament is what direct deliberation looks like once you've hit a hardware constraint and had to route around it. The constraint was never removed; it was only ever managed, at the cost of enormous information loss between citizen and outcome.
+            </p>
+
+            <p>
+                AI is the first technology in the history of the institution capable of actually removing that original constraint, and it puts pressure on parliamentary democracy along three fronts that follow directly from it. The first is pace. The proliferation of fast-moving, interacting AI systems introduces a pace and complexity of interaction that human, committee-paced deliberation cannot track. "Human-in-the-loop" governance risks becoming a liability rather than a safeguard — too slow to respond to crises unfolding at machine speed, forcing an ever-larger share of real decision-making to be delegated to AI regardless of what the formal constitutional text says.
+            </p>
+
+            <p>
+                The second is deliberation itself. Much of the value of parliamentary debate was that it was the best available method for aggregating dispersed human judgement into something resembling social consensus. If AI systems can identify overlapping areas of agreement between groups and model the likely consequences of different policies with real precision, then a great deal of what parliamentary debate exists to do — surfacing information, testing arguments, finding compromise — could plausibly be done faster and, in some respects, better by other means. That doesn't obviously make democratic legitimacy irrelevant. But it does mean the institutional form built to produce that legitimacy may no longer be doing the epistemic work it was designed for.
+            </p>
+
+            <p>
+                The third is power asymmetry. "One person, one vote" presupposes that raw power is distributed roughly evenly enough across individuals that no single actor can dominate the whole. An actor with privileged access to a frontier AI system — capable of finding, at scale, the specific argument, image, or appeal that moves each individual voter — has a form of leverage that has no real precedent in mass democracy. Voting doesn't need to be abolished for this to matter. It only needs to stop being where the real contest is decided.
+            </p>
+
+            <p>
+                Once the constraint that necessitated representation is gone, the representative has no remaining job. Parliament wasn't a value in itself — it was a proxy for direct deliberation, tolerated only because direct deliberation was technically impossible at scale. A system that can aggregate millions of individual positions directly, in full texture, and surface the actual structure of collective judgment does not make parliament more efficient. It makes parliament redundant, in the same way a working telephone network makes a chain of runners redundant rather than making the runners faster. Direct digital democracy isn't parliament assisted by AI. It's what takes parliament's place once the thing parliament was a workaround for stops being a constraint.
+            </p>
+
+            <h2>The class question</h2>
+
+            <p>
+                It would be a mistake to treat any of this as a purely technical substitution — new mechanism replaces old mechanism, function preserved, nobody's position affected. Both institutions produced ruling classes whose claim to their position rested on a specific function, and both functions are the ones just described going away.
+            </p>
+
+            <p>
+                The capital class's claim to its position was never ownership for its own sake — it was compensation for a function: providing, organising, and risking the capital that combined with human labour to produce anything at all. Ownership was a claim on the surplus generated by directing production, not a free-floating entitlement. Once production is carried out by AI-operated systems that don't need to be organised, financed, or risked by a human owner in order to run — that build, replicate, and improve their own capacity with minimal human direction — the function capital ownership was compensating for has nothing left to attach to. The owner isn't coordinating labour, because there's no labour being coordinated. They aren't bearing operational risk, because the system runs itself. They aren't allocating scarce inputs, because output approaches zero marginal cost. What's left is not a role but a title: a legal claim to the output of a system whose operation the claimant no longer contributes to in any functional sense. Continuing to enforce that claim at that point isn't protecting a productive function, because there isn't one left to protect. It's the state using property law to manufacture scarcity in access to a system that is not, in fact, scarce, purely to preserve the income of people whose original justification for that income has already been automated away.
+            </p>
+
+            <p>
+                The political class's claim rests on the identical structure. Representation was compensation for a function: absorbing and processing the complexity of collective preference that citizens couldn't process directly at scale, and exercising judgment on their behalf because judgment couldn't be exercised any other way. Once a system exists that can take in the unsimplified positions of millions of people, identify where they actually agree and disagree, and surface a decision that reflects that directly, the function representation was compensating for has nothing left to attach to. The representative isn't absorbing complexity anymore, because the complexity is being processed directly. What's left is not a function but a title: a legal claim to decision-making authority that the claimant no longer contributes anything functionally necessary to reach. Continuing to route decisions through a professional political class at that point isn't preserving a working intermediary — it's the state using electoral and constitutional law to manufacture a chokepoint between citizens' preferences and the decisions made on their behalf, purely to preserve the position of people whose original justification for holding that chokepoint has already been automated away.
+            </p>
+
+            <p>
+                In both cases, the functional argument is, in principle, checkable against the world. But neither class will experience its own position this way. From inside, ownership doesn't feel like a claim that had a function and has since lost it — it feels like an entitlement that exists independently of any test of present usefulness. Political authority doesn't feel like compensation for a now-obsolete cognitive bottleneck — it feels like legitimacy, conferred by election or tradition, self-justifying regardless of whether the problem it solved still exists. Neither class is going to reason from function to conclusion the way this essay does. Both are going to start from the conclusion — this is mine, and remains mine — and treat any argument that the underlying justification has expired as an attack to be resisted rather than a fact to be evaluated.
+            </p>
+
+            <p>
+                So: they will not give this up. Not because the functional argument is wrong, but because functional arguments have never been what determines whether a ruling class relinquishes power. There is no historical precedent for a propertied or political class voluntarily dissolving its own claim once that claim has been rendered non-functional; the pattern, every time, is that the claim gets defended by whatever means are available — legal, political, financial, and now technical — for as long as those means hold out, regardless of whether anyone can still say what the claim is actually for. The political class in particular controls the very apparatus — law, regulation, the machinery of the state — that would have to authorise its own replacement; it is being asked, in effect, to legislate itself out of the chokepoint it occupies, and no class in history has done that willingly on the strength of an argument alone. Expect active resistance, capture, and co-option of these technologies rather than gradual concession from either side.
+            </p>
+
+            <p>
+                That resistance is compounded by a fact that is easy to understate: these are not, and never really were, two separate classes. The idea that political power and capital were cleanly divided is closer to a founding myth than a description, even in the industrial era. Regulatory capture, the revolving door between government and finance, campaign finance, lobbying, and the basic fact that access to capital has always bought disproportionate political influence are not signs of recent decay — they are the system's longstanding operating condition. A political class that depends on capital to fund its campaigns and retire into, and a capital class that depends on the political class to enforce its property rights and shape its regulatory environment, were never fully separate interests. They were one interest operating through two sets of institutions, each lending the other legitimacy it couldn't generate alone.
+            </p>
+
+            <p>
+                What AI changes is not the fact of this fusion but its texture. Where the fusion previously required constant, visible negotiation — lobbying, funding, favours, revolving doors, all of it somewhat legible and occasionally interruptible — AI lets the same fused interest operate directly, without needing to negotiate between two nominally separate power centres at all. The class that already controlled both capital and political access no longer has to coordinate its own two hands; it can deploy AI systems that produce, that enforce property claims, that shape opinion, and that inform or replace policy decisions, as a single continuous operation rather than as two allied institutions transacting with each other. This is what makes the moment worse than either class becoming obsolete on its own would be, and worse than a future merger between two previously separate classes would be. If the fusion were new, there might be a brief window in which the previously separate halves resist merging, or in which the friction between them creates an opening for outside pressure. If the fusion is already the operating condition, and has been for some time, that window never existed. What AI removes is not a check that used to function, but the residual friction, visibility, and negotiation cost that were the closest thing to a check in practice — the belief in separated powers was doing real work as a story that made resistance seem plausible, whether or not the fault line it implied was ever really there.
+            </p>
+
+            <h2>Coordination studies</h2>
+
+            <p>
+                None of this is an argument that AI makes coordination impossible. It's the opposite: coordination — between humans, between institutions, and now between humans and AI systems — is about to matter enormously more, at exactly the moment our existing coordination mechanisms are losing their grip, and at exactly the moment the classes that ran those mechanisms have the least reason to let them go quietly. What's needed is not a patch to markets and parliaments, but a research programme aimed squarely at the problem those two institutions were invented to solve in the first place, under the technological conditions we now actually face — and squarely at the problem of building it against resistance rather than by invitation.
+            </p>
+
+            <p>
+                Call this programme coordination studies: the study of coordination problems — the incentive structures that push individually rational actors toward collectively disastrous outcomes, the races to the bottom nobody wants but nobody can unilaterally exit, the bad equilibria that lock whole societies in place — and the design of coordination mechanisms capable of resolving them, for a world that includes both humans and AI systems as participants.
+            </p>
+
+            <p>
+                This is not an entirely new ambition. It sits in a lineage that runs from the Progress Studies movement's call for a rigorous science of the conditions that make societies flourish, through the growing recognition within effective altruism that the transition to a "post-AGI society" deserves the same kind of sustained institutional attention that earlier Enlightenment thinkers gave to the transition into modernity.<sup>8</sup> What coordination studies adds is a narrower and more mechanical focus: not what a good post-AGI society would value, but what institutional architecture could actually get a society with wildly divergent interests and unevenly distributed AI capability to act on those values together, rather than being ground down by the same competitive pressures that are currently pushing AI development itself toward danger — and rather than being quietly absorbed by the fused class with the most to lose from any real alternative succeeding.
+            </p>
+
+            <h2>Two early prototypes</h2>
+
+            <p>
+                Because this is a call for institutional experimentation rather than a single blueprint, it's worth pointing to two live projects already attempting to build a piece of what a post-market, post-parliamentary political economy might look like — less as endorsements than as evidence that the design space is not empty, and with the caveat above squarely in view: these are not neutral upgrades that incumbents will welcome, but early contenders for a role incumbents have every reason to obstruct.
+            </p>
+
+            <p>
+                The first is Integral, a proposed parallel economy for decentralised, non-market production and distribution, developed by systems theorist Peter Joseph. Rather than relying on price signals, it coordinates production and resource allocation through a set of interlocking subsystems: collective decision-making, an open repository of shared production knowledge, a non-monetary system for accounting contribution, and a feedback loop tying operational reality back into governance. Joseph frames the core failure of market economics as a "proxy problem" — that price, the signal modern economies use to allocate almost everything, cannot represent the things that actually matter most: ecological cost, long-run health effects, the true distribution of need.<sup>9</sup> Whether or not Integral itself succeeds, it's a concrete attempt to design resource allocation around those excluded variables directly, rather than trying to price them in after the fact.
+            </p>
+
+            <p>
+                The second is The Internet Government, a long-running project of The Society Library, led by Jamie Joyce, aimed at building a participatory digital democracy for large-scale deliberation between human groups. Rather than aggregating votes, it aims to aggregate arguments — separating ideas from the individuals holding them, so that the relevant contest is between the strength of reasons rather than the size of factions, and using AI-assisted synthesis to find legislative solutions that address the legitimate concerns on all sides rather than simply outvoting them. Joyce has recently described the underlying need as "scaled democratic reasoning": civilisation-scale decisions now involve a volume and complexity of information that no group of humans, working at human speed, can process reliably on their own.<sup>10</sup> The project remains at an early, conceptual stage, but it points toward the same target as several current strands of AI-assisted deliberation research: making democratic input richer and more legible, rather than replacing it.
+            </p>
+
+            <p>
+                Neither project is a finished answer. Both are, in the sense meant by this essay, prototypes — small-scale, low-stakes attempts to test institutional forms before the stakes get high and the time to test them runs out, and before the fused class with the most to lose has fully turned its attention to them.
+            </p>
+
+            <h2>Now is the time</h2>
+
+            <p>
+                Fukuyama's essay, read in full, is less triumphalist than its reputation suggests. Its closing lines wonder whether the sheer tedium of a world with the great ideological contests settled might itself be enough to set history moving again.<sup>11</sup> What actually looks likely to restart it is not boredom, but a technology that removes the two premises the end-of-history thesis quietly depended on: that human labour and human deliberation would remain economically and politically indispensable. Neither assumption looks secure anymore.
+            </p>
+
+            <p>
+                That is a loss, in the sense that a great deal of hard-won institutional stability is now genuinely up for renegotiation, at a moment when the world can least afford instability. But it is also, distinctly, an opening — though not an uncontested one. The institutions Fukuyama took to be the end point of history were not always there. They were designed, tested, discarded, and redesigned by people who had far less warning than we do that a new age was coming. We have significantly more warning than they did, and — for now — more time to use it. What we don't have is a neutral field to build on: the case above is that the classes standing to lose the most from real alternatives are already fused, already entrenched, and already positioned to turn the same technology that could replace them into the means of extending their hold instead. That does not make the task optional. It makes it more urgent, and it changes what counts as success — not a finished theory of what a post-AGI political economy should look like, arrived at through calm deliberation, but tested, resilient prototypes built and hardened now, while there is still room to build them, against the near-certainty that they will not be welcomed by the classes whose obsolescence they represent.
+            </p>
+        </div>
+
+        <!-- Footnotes Section -->
+        <div class="footnotes">
+            <hr class="short">
+            <p><sup>1</sup> Francis Fukuyama, "The End of History?", The National Interest (Summer 1989).</p>
+            <p><sup>2</sup> Boris Johnson, remarks reaffirming liberal democracy and free markets as the best available model for social and economic progress, 2021.</p>
+            <p><sup>3</sup> The line is often attributed to Fredric Jameson, though he himself credited it to others; it appears in his The Seeds of Time (1994) and is discussed at length in Mark Fisher, Capitalist Realism: Is There No Alternative? (2009).</p>
+            <p><sup>4</sup> E.O. Wilson, The Meaning of Human Existence (2014); the line is also quoted in his 2017 remarks on The Origins of Creativity.</p>
+            <p><sup>5</sup> On gradual disempowerment, see Jan Kulveit et al., "Gradual Disempowerment: Systemic Existential Risks from Incremental AI Development" (2025).</p>
+            <p><sup>6</sup> Peter Joseph outlines the shift from ownership to access as one of five economic transitions underlying a post-market economy in his writing on Integral, including "Integral: An Introduction."</p>
+            <p><sup>7</sup> Friedrich Hayek, "The Use of Knowledge in Society," American Economic Review (1945).</p>
+            <p><sup>8</sup> See the Progress Studies movement, seeded by Patrick Collison and Tyler Cowen's "We Need a New Science of Progress" (2019), and William MacAskill's proposal that effective altruism take up the project of a "second enlightenment" for the age of AGI.</p>
+            <p><sup>9</sup> Peter Joseph, on economic calculation and the limits of price as a proxy for social value, in his writing on Integral Cybernetics.</p>
+            <p><sup>10</sup> Jamie Joyce, The Society Library, on "scaled democratic reasoning" and the limits of human-scale deliberation for civilisation-scale decisions.</p>
+            <p><sup>11</sup> Fukuyama, "The End of History?" (1989), closing section.</p>
+        </div>
+    </main>
+
+    <script>
+        // Simple script to toggle the dark mode class on the body
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
